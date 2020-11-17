@@ -1,0 +1,16 @@
+#Property of Not Real Engineering 
+#Copyright 2020 Not Real Engineering - All Rights Reserved You may not use, 
+#           distribute and modify this code without the written permission 
+#           from Not Real Engineering.
+
+# Step 1 Tessellation 
+$ neper -T -n 15 -id 1 -format tess,ori -o Polycrystal_basic
+$ neper -V Polycrystal_basic.tess -datacellcol id -datacelltrs 0.5 -print Polycrystal_basic_image
+
+# Create "grainRefine" file
+
+# Step 2 Tessellation
+$ neper -T -n "15::file(grainRefine)" -id 1::1 -format tess,ori -o Polycrystal_refined
+$ neper -V Polycrystal_refined.tess -datacellcol id -datacelltrs 0.5 -print Polycrystal_refined_image
+$ neper -M Polycrystal_refined.tess -order 2 -meshqualexpr Odis -meshqualmin 1
+$ neper -V Polycrystal_refined.tess,Polycrystal_refined.msh -dataelsetcol id -print Polycrystal_refined_mesh_image
